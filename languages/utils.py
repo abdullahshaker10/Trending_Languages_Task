@@ -4,11 +4,9 @@ from datetime import datetime, timedelta
 
 class TrandingGithubAPI:
     def __init__(self, languages_count):
-        self.from_date = (datetime.today() -
-                          timedelta(days=30)).strftime("%Y-%m-%d")
+        self.from_date = (datetime.today() - timedelta(days=30)).strftime("%Y-%m-%d")
         self.languages_count = languages_count
-        self.api_url = f"""https://api.github.com/search/repositories?q=created:>
-        {self.from_date}&sort=stars&order=desc&per_page={self.languages_count}"""
+        self.api_url = f"""https://api.github.com/search/repositories?q=created:>{self.from_date}&sort=stars&order=desc&per_page={self.languages_count}"""
 
     def _get_trending_repositories(self):
         repositories = requests.get(url=self.api_url).json()["items"][:100]
